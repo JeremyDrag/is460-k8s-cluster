@@ -8,6 +8,7 @@ resource "helm_release" "example" {
   name       = "wordpress"
   repository = "https://charts.bitnami.com/bitnami"
   chart      = "wordpress"
+  namespace = kubernetes_namespace.wordpress.metadata["name"]
 
   #   values = [
   #     "${file("values.yaml")}"
