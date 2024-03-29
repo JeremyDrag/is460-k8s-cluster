@@ -6,7 +6,7 @@ locals {
 }
 
 data "aws_caller_identity" "current" {}
- 
+
 data "aws_iam_role" "cluster_role" {
   name = "LabRole"
 }
@@ -39,13 +39,13 @@ resource "aws_eks_node_group" "this" {
 }
 
 resource "aws_eks_addon" "ebs_csi_driver" {
-  cluster_name      = aws_eks_cluster.this.name  # Your EKS cluster name
-  addon_name        = "aws-ebs-csi-driver"          # Add-on name for EBS CSI driver
+  cluster_name = aws_eks_cluster.this.name # Your EKS cluster name
+  addon_name   = "aws-ebs-csi-driver"      # Add-on name for EBS CSI driver
   # addon_version     = "v1.28.0"                      # Specify the version; adjust as necessary
-  resolve_conflicts_on_update = "OVERWRITE"                   # Overwrite conflicts if they exist
+  resolve_conflicts_on_update = "OVERWRITE" # Overwrite conflicts if they exist
 }
 
 module "helm" {
-  source = "./modules/helm"
-  depends_on = [aws_eks_cluster.this]
+  source       = "./modules/helm"
+  cluster_name = aws_eks_cluster.this.name
 }

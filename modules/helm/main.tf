@@ -1,5 +1,5 @@
-locals {
-    cluster_name = "test-eks"
+variable "cluster_name" {
+  type = string
 }
 
 provider "kubernetes" {
@@ -17,9 +17,9 @@ provider "helm" {
 }
 
 data "aws_eks_cluster" "eks" {
-  name = local.cluster_name
+  name = var.cluster_name
 }
 
 data "aws_eks_cluster_auth" "eks" {
-  name = local.cluster_name
+  name = var.cluster_name
 }
