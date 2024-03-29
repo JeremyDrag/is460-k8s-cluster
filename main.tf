@@ -45,19 +45,7 @@ resource "aws_eks_addon" "ebs_csi_driver" {
   resolve_conflicts_on_update = "OVERWRITE"                   # Overwrite conflicts if they exist
 }
 
-# resource "aws_eks_fargate_profile" "this" {
-#   cluster_name           = aws_eks_cluster.this.name
-#   fargate_profile_name   = "fargate-profile"
-#   pod_execution_role_arn = data.aws_iam_role.cluster_role.arn  # Your existing IAM role for Fargate pods
-#   subnet_ids             = module.vpc.private_subnets
-
-#   selector {
-#     namespace = "kube-system"
-#   }
-#   selector {
-#     namespace = "default"
-#   }
-#   selector {
-#     namespace = "dev"
-#   }    
-# }
+module "helm" {
+  source = "./modules/helm"
+  depends_on = [aws_eks_cluster.this]
+}
