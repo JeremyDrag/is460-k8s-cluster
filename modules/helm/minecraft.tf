@@ -8,7 +8,7 @@ resource "helm_release" "router" {
   name       = "mc-router"
   repository = "https://itzg.github.io/minecraft-server-charts/"
   chart      = "itzg/mc-router"
-  namespace = kubernetes_namespace.minecraft.metadata["name"]
+  namespace = kubernetes_namespace.minecraft.metadata[0]["name"]
 
   #   values = [
   #     "${file("values.yaml")}"
