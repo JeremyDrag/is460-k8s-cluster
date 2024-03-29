@@ -11,7 +11,10 @@ init:
 	@terraform init
 	
 fmt:
-	@terraform fmt
+	@terraform fmt -recursive
+	
+fmt:
+	@terraform validate
 	
 refresh:
 	@aws eks update-kubeconfig --name test-eks --region us-east-1
