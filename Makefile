@@ -13,7 +13,7 @@ init:
 fmt:
 	@terraform fmt -recursive
 	
-fmt:
+validate:
 	@terraform validate
 	
 refresh:
