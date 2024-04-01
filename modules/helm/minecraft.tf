@@ -22,4 +22,8 @@ resource "helm_release" "minecraft" {
     name = "minecraftServer.eula"
     value = "true"
   }
+  set {
+    name = "minecraftServer.externalTrafficPolicy"
+    value = "Cluster"
+  }
 }
