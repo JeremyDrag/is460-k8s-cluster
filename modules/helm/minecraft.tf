@@ -9,6 +9,7 @@ resource "helm_release" "router" {
   repository = "https://itzg.github.io/minecraft-server-charts/"
   chart      = "mc-router"
   namespace = kubernetes_namespace.minecraft.metadata[0].name
+  timeout = 15*60
 }
 
 resource "helm_release" "minecraft" {
@@ -16,6 +17,7 @@ resource "helm_release" "minecraft" {
   repository = "https://itzg.github.io/minecraft-server-charts/"
   chart      = "minecraft"
   namespace = kubernetes_namespace.minecraft.metadata[0].name
+  timeout = 15*60
   set {
     name = "minecraftServer.eula"
     value = "true"
