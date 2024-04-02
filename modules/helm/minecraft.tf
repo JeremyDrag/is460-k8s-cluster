@@ -4,14 +4,6 @@ resource "kubernetes_namespace" "minecraft" {
   }
 }
 
-resource "helm_release" "router" {
-  name       = "router"
-  repository = "https://itzg.github.io/minecraft-server-charts/"
-  chart      = "mc-router"
-  namespace = kubernetes_namespace.minecraft.metadata[0].name
-  timeout = 15*60
-}
-
 resource "helm_release" "minecraft" {
   name       = "minecraft"
   repository = "https://itzg.github.io/minecraft-server-charts/"
@@ -23,7 +15,7 @@ resource "helm_release" "minecraft" {
     value = "true"
   }
   set {
-    name = "minecraftServer.externalTrafficPolicy"
-    value = "Cluster"
+    name = "minecraftServer.serviceType"
+    value = "LoadBalancery"
   }
 }
