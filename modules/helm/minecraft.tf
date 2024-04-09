@@ -16,6 +16,6 @@ resource "helm_release" "minecraft" {
   }
   set {
     name = "minecraftServer.serviceType"
-    value = "LoadBalancery"
+    value = "LoadBalancer"
   }
 }
